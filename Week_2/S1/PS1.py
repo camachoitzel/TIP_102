@@ -128,14 +128,49 @@ Plan -
 
 # 4500
 
+""" 
+Understand - 
 
-# Understand - 
+Input - a dict of ticket sales
+Output - an int of total num of tickets sold
+Edge Cases - empty dict, tickets sold is not an int, # of tickets is a large number
 
-# Plan -
+Plan -
 
+-check if dict empty
+    -return empty dict {}
+-check if ticket sales value is int
+    -if not int return error
+-create total var
+-get values from ticket_sales dict and add them together
+
+-return total
+
+"""
 # Implement: 
 
 
+# def total_sales(ticket_sales):
+#     if not ticket_sales:
+#         return {}
+
+#     for key, val in ticket_sales.items():
+#         try:
+#             ticket_sales[key] = int(val)
+#         except(ValueError, TypeError):
+#             ticket_sales[key] = 0
+
+#     total = 0
+
+#     for ticket_type in ticket_sales:
+#         total += ticket_sales[ticket_type]
+
+#     return total
+
+
+# ticket_sales = {"Friday": 200, "Saturday": 1000, "Sunday": 800, "3-Day Pass": 2500}
+
+# print(total_sales(ticket_sales))
 
 # P4
 
@@ -168,13 +203,58 @@ Plan -
 
 # {"Stromae": "9:00 PM", "HARDY": "7:00 PM"}
 
-
+"""
 # Understand - 
-# input output
+# input- 2 dicts w/ schedules
+# output - 1 dict w/ scheduling conflicts
+# edge cases - 1 or 2 empty dicts
 
 # Plan -
 
+- if venue 1 or venue 2 schedule is empty
+    -return error 
+- create empty dict to hold time conflicts
+
+- check keys and values in venue 1 and 2 dict
+    - if key and value is the same in both
+        -add to time conflict dict
+-return time conflict dict
+"""
+
+
 # Implement: 
+
+def identify_conflicts(venue1_schedule, venue2_schedule):
+
+    if not venue1_schedule or venue2_schedule:
+        print("Incomplete Schedules")
+
+    schedule_conflict = {}
+
+    for artist in venue1_schedule:
+        if artist in venue2_schedule:
+            if venue1_schedule[artist] == venue2_schedule[artist]:
+                schedule_conflict[artist] = venue1_schedule[artist]
+
+    return schedule_conflict
+
+
+venue1_schedule = {
+    "Stromae": "9:00 PM",
+    "Janelle Monáe": "8:00 PM",
+    "HARDY": "7:00 PM",
+    "Bruce Springsteen": "6:00 PM"
+}
+
+venue2_schedule = {
+    "Stromae": "9:00 PM",
+    "Janelle Monáe": "8:00 PM",
+    "HARDY": "7:00 PM",
+    "Wizkid": "6:00 PM"
+}
+
+print(identify_conflicts(venue1_schedule, venue2_schedule))
+
 
 
 
