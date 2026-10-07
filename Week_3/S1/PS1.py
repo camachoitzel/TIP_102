@@ -43,32 +43,32 @@ PLAN:
 
 """
 
-def is_valid_post_format(posts):
-  if not posts:
-     return False
+# def is_valid_post_format(posts):
+#   if not posts:
+#      return False
 
-  stack = []
-  dict = {")": "(", "}":"{", "]": "["}
+#   stack = []
+#   dict = {")": "(", "}":"{", "]": "["}
   
-  for char in posts:
+#   for char in posts:
     
-    if char in set("({["):
-        stack.append(char)
+#     if char in set("({["):
+#         stack.append(char)
     
-    elif char in set(")}]"):
-        if not stack:
-           return False
+#     elif char in set(")}]"):
+#         if not stack:
+#            return False
         
-        top = stack.pop()
+#         top = stack.pop()
         
-        if top != dict.get(char):
-           return False
-  return not stack
+#         if top != dict.get(char):
+#            return False
+#   return not stack
 
-print(is_valid_post_format("()"))
-print(is_valid_post_format("()[]{}")) 
-print(is_valid_post_format("(]"))
-print(is_valid_post_format("("))
+# print(is_valid_post_format("()"))
+# print(is_valid_post_format("()[]{}")) 
+# print(is_valid_post_format("(]"))
+# print(is_valid_post_format("("))
 
 """
 Problem 2: Reverse User Comments Queue
@@ -138,11 +138,16 @@ True
 False
 
 UNDERSTAND:
-Input -
-Output - 
-Edge Cases - 
+Input - A string
+Output - boolean
+Edge Cases - empty string, letter cases
 
 PLAN:
+if string is empty return True
+remove spaces and punctuation from sentence and lowercase the sentence
+create a left and right ptr
+left ptr = 0 and right ptr = length of string - 1
+
 
 
 
