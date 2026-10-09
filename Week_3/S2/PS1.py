@@ -49,8 +49,19 @@ def manage_stage_changes(changes):
     scheduled_stack = []
     cancelled_stack = []
 
-    for schedule in changes:
-        if changes[schedule] is "Schedule"
+    for change in changes:
+        if change.startswith("Schedule"):
+            id = change.split()[1]
+            scheduled_stack.append(id)
+        elif change == "Cancel":
+            if scheduled_stack:
+                cancelled_id = scheduled_stack.pop()
+                cancelled_stack.append(cancelled_id)
+        elif change == "Reschedule":
+            if cancelled_stack:
+                reschedule_id = cancelled_stack.pop()
+                scheduled_stack.append(reschedule_id)
 
+    return scheduled_stack
 
     
