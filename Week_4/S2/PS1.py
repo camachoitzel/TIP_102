@@ -32,38 +32,37 @@ Plan:
 
 """
 #Implement
-def find_task_pair(task_times, available_time):
-    left = 0
-    right = len(task_times) - 1
-    total = 0
+# def find_task_pair(task_times, available_time):
+#     left = 0
+#     right = len(task_times) - 1
+#     total = 0
     
-    while left < right:
-        total = task_times[left] + task_times[right]
-        if total == available_time:
-            return True
-        elif total < available_time:
-            left = left + 1
-        elif total > available_time:
-            right = right - 1
+#     while left < right:
+#         total = task_times[left] + task_times[right]
+#         if total == available_time:
+#             return True
+#         elif total < available_time:
+#             left = left + 1
+#         elif total > available_time:
+#             right = right - 1
     
-    return total == available_time
+#     return total == available_time
         
 
 # Example Usage:
 
-'''
-task_times = [30, 45, 60, 90, 120]
-available_time = 105
-print(find_task_pair(task_times, available_time))
+# task_times = [30, 45, 60, 90, 120]
+# available_time = 105
+# print(find_task_pair(task_times, available_time))
 
-task_times_2 = [15, 25, 35, 45, 55]
-available_time = 100
-print(find_task_pair(task_times_2, available_time))
+# task_times_2 = [15, 25, 35, 45, 55]
+# available_time = 100
+# print(find_task_pair(task_times_2, available_time))
 
-task_times_3 = [20, 30, 50, 70]
-available_time = 60
-print(find_task_pair(task_times_3, available_time))
-'''
+# task_times_3 = [20, 30, 50, 70]
+# available_time = 60
+# print(find_task_pair(task_times_3, available_time))
+
 
 """
 Problem 2: Minimizing Workload Gaps
@@ -101,21 +100,32 @@ PLAN:
     
 
 """
-def convert_min(work_sessions):
-    new_tuple = []
-    for start, end, in work_sessions:
-        start = start * 60 
-        end = end * 60
-        new_tuple.append((start, end))
-    
-    return new_tuple
+def convert_min(time):
+    hours = time // 100
+    minutes = time % 100
+
+    return hours * 60 + minutes
         
     
 def find_smallest_gap(work_sessions):
-    gap = 0
-    min_tuple = convert_min(work_sessions)
-    
-    for i in range(1, len(min_tuple)):
+    if len(work_sessions) < 2:
+        return 0
+
+    smallest_gap = float("inf")
+
+    for i in range(1, len(work_sessions)):
+        prev_end = work_sessions[i - 1][1]
+        curr_start = work_sessions[i][0]
+
+        prev_end_minutes = convert_min(prev_end)
+        curr_start_minutes = convert_min(curr_start)
+
+        gap = curr_start_minutes - prev_end_minutes
+
+        if gap < smallest_gap:
+            smallest_gap = gap
+
+    return smallest_gap
         
     
 
@@ -123,15 +133,14 @@ def find_smallest_gap(work_sessions):
 # Example Usage:
 
 work_sessions = [(900, 1100), (1300, 1500), (1600, 1800)]
-#print(find_smallest_gap(work_sessions))
+print(find_smallest_gap(work_sessions))
 
-print(convert_min(work_sessions))
 
-#work_sessions_2 = [(1000, 1130), (1200, 1300), (1400, 1500)]
-#print(find_smallest_gap(work_sessions_2))
+work_sessions_2 = [(1000, 1130), (1200, 1300), (1400, 1500)]
+print(find_smallest_gap(work_sessions_2))
 
-#work_sessions_3 = [(900, 1100), (1115, 1300), (1315, 1500)]
-#print(find_smallest_gap(work_sessions_3))
+work_sessions_3 = [(900, 1100), (1115, 1300), (1315, 1500)]
+print(find_smallest_gap(work_sessions_3))
 
 
 
